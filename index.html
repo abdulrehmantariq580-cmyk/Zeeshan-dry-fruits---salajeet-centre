@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeeshan Dry Fruits & Salajeet Center</title>
+    <!-- Google Fonts for Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables (Theme Colors) --- */
+        :root {
+            --bg-white: #ffffff;
+            --primary-gold: #c69c38;
+            --secondary-green: #688a27;
+            --text-dark: #1a1a1a;
+            --announcement-bg: #111111;
+        }
+
+        /* --- Basic Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+        }
+
+        /* --- 1. Announcement Bar --- */
+        .announcement-bar {
+            background-color: var(--announcement-bg);
+            color: var(--primary-gold);
+            text-align: center;
+            padding: 10px 15px;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* --- 2. Premium Header --- */
+        .premium-header {
+            background-color: var(--bg-white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-container {
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .header-logo-img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .header-logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .desktop-nav {
+            display: flex;
+            gap: 30px;
+        }
+        .desktop-nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-green);
+            transition: width 0.3s ease;
+        }
+        .desktop-nav a:hover {
+            color: var(--secondary-green);
+        }
+        .desktop-nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-dark);
+            transition: fill 0.3s ease;
+        }
+        .cart-icon:hover svg {
+            fill: var(--primary-gold);
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--secondary-green);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            transition: 0.3s;
+        }
+
+        /* --- 3. Sliding Mobile Menu --- */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--bg-white);
+            z-index: 2000;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 25px;
+        }
+        .mobile-sidebar.active {
+            left: 0;
+        }
+        .close-menu {
+            align-self: flex-end;
+            font-size: 30px;
+            color: var(--text-dark);
+            cursor: pointer;
+            line-height: 1;
+            margin-bottom: 30px;
+            transition: color 0.3s;
+        }
+        .close-menu:hover {
+            color: var(--primary-gold);
+        }
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .mobile-nav-links a:hover {
+            color: var(--secondary-green);
+            padding-left: 5px;
+        }
+        .mobile-contact {
+            margin-top: auto;
+            text-align: center;
+        }
+        .mobile-contact p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .whatsapp-button {
+            display: block;
+            background-color: var(--secondary-green);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        /* --- 4. Hero Section (Images Only, 16:9 Ratio) --- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Perfect 16:9 for PC & Mobile */
+            overflow: hidden;
+            display: block;
+        }
+
+        .hero-slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+
+        .dot.active {
+            background-color: var(--primary-gold);
+            transform: scale(1.3);
+            border-color: #ffffff;
+        }
+
+        /* --- 5. Moving Categories Section --- */
+        .categories-section {
+            padding: 50px 0;
+            background-color: var(--bg-white);
+            overflow: hidden;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .section-title span {
+            color: var(--primary-gold);
+        }
+
+       /* Infinite Marquee Animation Setup */
+    .marquee-container {
+        display: flex;
+        width: max-content; /* Fix: Items ko unki pori jagah lene dega */
+        animation: scrollLeft 10s linear infinite; /* Speed fast kar di (20s se 10s) */
+    }
+
+    .marquee-container:hover {
+        animation-play-state: paused;
+    }
+
+    .category-track {
+        display: flex;
+        gap: 40px; /* Circles ke darmiyan khuli jagah */
+        padding-right: 40px; /* Seamless loop ke liye */
+    }
+
+    .category-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        cursor: pointer;
+        flex-shrink: 0; /* Sabse zaroori fix: Yeh circles ko overlap hone se rokega */
+        width: 120px; /* Fixed width */
+    }
+
+        .category-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            padding: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .category-item:hover .category-circle {
+            border-color: var(--primary-gold);
+            transform: scale(1.05);
+        }
+
+        .category-name {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- 6. Featured Products Section --- */
+        .products-section {
+            padding: 60px 5%;
+            background-color: #fafafa;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding-bottom: 20px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            overflow: hidden;
+        }
+
+        .product-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.08);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-green);
+            color: white;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 20px 15px 0;
+        }
+
+        .product-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .btn-cart {
+            background-color: var(--text-dark);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            width: 80%;
+        }
+
+        .btn-cart:hover {
+            background-color: var(--primary-gold);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 991px) {
+            .desktop-nav { display: none; }
+            .hamburger-menu { display: flex; }
+        }
+
+        @media (max-width: 768px) {
+            .category-item {
+            width: 80px; /* Mobile par width choti kar di */
+        }
+        .category-track {
+            gap: 20px; /* Mobile par gap adjust kiya */
+            padding-right: 20px;
+        }
+            /* Mobile par dots ko thora adjust kiya */
+            .slider-dots { bottom: 10px; }
+            .dot { width: 8px; height: 8px; }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .category-circle {
+                width: 80px;
+                height: 80px;
+            }
+            .category-name { font-size: 13px; }
+            .product-title { font-size: 14px; }
+            .product-price { font-size: 14px; }
+            .btn-cart {
+                width: 90%;
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            .section-title { font-size: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .logo-main { font-size: 26px; }
+            .logo-sub { font-size: 12px; }
+            .mobile-sidebar { width: 85%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= PART 1 START (Header) ================= -->
+    <div class="announcement-bar">
+        Premium Quality • 100% Natural & Pure
+    </div>
+
+    <header class="premium-header">
+        <div class="hamburger-menu" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <a href="#" class="logo-container">
+            <img src="media/logo.webp" fetchpriority="high" alt="Zeeshan Dry Fruits & Salajeet" class="header-logo-img">
+        </a>
+
+        <nav class="desktop-nav">
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">Salajeet</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <div class="cart-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M16 6v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h18v-18h-5zm-6-2c0-1.103.897-2 2-2s2 .897 2 2v2h-4v-2zm-3 4v2h2v-2h6v2h2v-2h3v14h-14v-14h1z"/>
+                </svg>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="menuOverlay"></div>
+
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="close-menu" id="closeBtn">&times;</div>
+        <div class="mobile-nav-links">
+            <a href="#">Home</a>
+            <a href="#">Shop Dry Fruits</a>
+            <a href="#">Premium Salajeet</a>
+            <a href="#">Track Order</a>
+            <a href="#">About Skardu</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="mobile-contact">
+            <p>Need Help?</p>
+            <a href="https://wa.me/923466593878" class="whatsapp-button">WhatsApp Us</a>
+        </div>
+    </aside>
+    <!-- ================= PART 1 END ================= -->
+
+    <!-- ================= PART 2 START (Hero Banner 16:9 - Image Only) ================= -->
+    <section class="hero-section">
+        <div class="hero-slides">
+            <div class="slide active" style="background-image: url('media/banner_3.webp');"></div>
+            <div class="slide" style="background-image: url('media/banner_2.webp');"></div>
+            <div class="slide" style="background-image: url('media/banner_1.webp');"></div>
+        </div>
+
+        <div class="slider-dots">
+            <div class="dot active" onclick="currentSlide(0)"></div>
+            <div class="dot" onclick="currentSlide(1)"></div>
+            <div class="dot" onclick="currentSlide(2)"></div>
+        </div>
+    </section>
+    <!-- ================= PART 2 END ================= -->
+
+    <!-- ================= PART 3 START (Categories & Products) ================= -->
+    <section class="categories-section">
+        <h2 class="section-title">Shop By <span>Category</span></h2>
+        <div class="marquee-container">
+            <!-- First Set -->
+            <div class="category-track">
+                <a href="#" class="category-item">
+                    <img src="media/cat1.webp" class="category-circle" alt="Walnuts">
+                    <span class="category-name">Walnuts</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat2.webp" class="category-circle" alt="Salajeet">
+                    <span class="category-name">Pure Salajeet</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat3.webp" class="category-circle" alt="Almonds">
+                    <span class="category-name">Almonds</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat4.webp" class="category-circle" alt="Pistachios">
+                    <span class="category-name">Pistachios</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat5.webp" class="category-circle" alt="Dried Figs">
+                    <span class="category-name">Dried Figs</span>
+                </a>
+            </div>
+            
+            <!-- Second Set (Duplicate) -->
+            <div class="category-track">
+                <a href="#" class="category-item">
+                    <img src="media/cat1.webp" class="category-circle" alt="Walnuts">
+                    <span class="category-name">Walnuts</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat2.webp" class="category-circle" alt="Salajeet">
+                    <span class="category-name">Pure Salajeet</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat3.webp" class="category-circle" alt="Almonds">
+                    <span class="category-name">Almonds</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat4.webp" class="category-circle" alt="Pistachios">
+                    <span class="category-name">Pistachios</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="media/cat5.webp" class="category-circle" alt="Dried Figs">
+                    <span class="category-name">Dried Figs</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <h2 class="section-title">Best <span>Sellers</span></h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <span class="badge">100% Pure</span>
+                    <img src="media/product_1.webp" class="product-img" alt="Premium Salajeet">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Salajeet</h3>
+                    <p class="product-price">Rs. 2,500</p>
+                    <button class="btn-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="media/product_2.webp" class="product-img" alt="Skardu Walnuts">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Kaghzi Walnuts</h3>
+                    <p class="product-price">Rs. 1,800</p>
+                    <button class="btn-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="media/product_3.webp" class="product-img" alt="Roasted Almonds">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Roasted Almonds</h3>
+                    <p class="product-price">Rs. 2,200</p>
+                    <button class="btn-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <span class="badge" style="background-color: var(--primary-gold);">Sale</span>
+                    <img src="media/product_4.webp" class="product-img" alt="Pistachios">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Salted Pistachios</h3>
+                    <p class="product-price">Rs. 2,800</p>
+                    <button class="btn-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================= PART 3 END ================= -->
+
+    <!-- --- JavaScript Scripts --- -->
+    <script>
+        // --- Header Mobile Menu Logic ---
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function openMenu() {
+            mobileSidebar.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileSidebar.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        hamburgerBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        // --- Cleaned up Hero Slider Logic (Images Only) ---
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides[currentSlideIndex].classList.remove('active');
+            dots[currentSlideIndex].classList.remove('active');
+            
+            currentSlideIndex = index;
+            
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                let nextSlide = (currentSlideIndex + 1) % slides.length;
+                showSlide(nextSlide);
+            }, 5000); // Changes image every 5 seconds
+        }
+
+        function currentSlide(index) {
+            clearInterval(slideInterval);
+            showSlide(index);
+            startAutoSlide();
+        }
+
+        startAutoSlide();
+    </script>
+    <style>
+    /* --- 7. Dual Promotional Banners --- */
+    .dual-banners {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* PC mein 2 columns (Left / Right) */
+        gap: 20px;
+        padding: 50px 5%;
+        background-color: var(--bg-white);
+    }
+
+    .banner-item {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9; /* Perfect rectangular shape */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        display: block; /* Removes text formatting issues */
+    }
+
+    .banner-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .banner-item:hover .banner-img {
+        transform: scale(1.05); /* Hover par image thori zoom hogi */
+    }
+
+    /* --- Responsive Design for Mobile --- */
+    @media (max-width: 768px) {
+        .dual-banners {
+            grid-template-columns: 1fr; /* Mobile mein 1 column (Ek upar, ek neechay) */
+            gap: 15px;
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+<!-- ================= PART 4 START (Dual Banners) ================= -->
+<section class="dual-banners">
+    <!-- Left Banner (PC) / Top Banner (Mobile) -->
+    <a href="#shop" class="banner-item">
+        <img src="media/promo1.webp" alt="Promo Banner 1" class="banner-img">
+    </a>
+    
+    <!-- Right Banner (PC) / Bottom Banner (Mobile) -->
+    <a href="#salajeet" class="banner-item">
+        <img src="media/promo2.webp" alt="Promo Banner 2" class="banner-img">
+    </a>
+</section>
+<!-- ================= PART 4 END ================= -->
+ <style>
+    /* --- 7. Promotional Banner Section (Idea 2) --- */
+    .promo-banner {
+        position: relative;
+        /* Yahan banner ki HD image lagayen */
+        background: url('https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?q=80&w=2000&auto=format&fit=crop') center/cover fixed; 
+        padding: 100px 5%;
+        display: flex;
+        align-items: center;
+        min-height: 450px;
+        margin-top: 40px;
+    }
+
+    .promo-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        /* Left side par dark fade taake text clear parha jaye */
+        background: linear-gradient(to right, rgba(17, 17, 17, 0.9) 0%, rgba(17, 17, 17, 0.3) 100%);
+    }
+
+    .promo-content {
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+        color: var(--bg-white);
+    }
+
+    .promo-subtitle {
+        color: var(--primary-gold);
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        display: block;
+        font-weight: 600;
+    }
+
+    .promo-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    .promo-desc {
+        font-size: 16px;
+        margin-bottom: 30px;
+        color: #e0e0e0;
+        line-height: 1.7;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* --- 8. Instagram Gallery Section --- */
+    .insta-section {
+        padding: 80px 5%;
+        background-color: #fafafa;
+    }
+
+    .insta-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .insta-handle {
+        font-size: 14px;
+        color: var(--secondary-green);
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .insta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* PC par ek line me 3 images */
+        gap: 15px;
+    }
+
+    .insta-item {
+        position: relative;
+        aspect-ratio: 1 / 1; /* 1:1 Perfect Square */
+        overflow: hidden;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .insta-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .insta-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Hover par dark overlay */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .insta-icon {
+        width: 35px;
+        height: 35px;
+        fill: #ffffff;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+    }
+
+    .insta-item:hover .insta-img {
+        transform: scale(1.1); /* Image thori bari hogi */
+    }
+
+    .insta-item:hover .insta-overlay {
+        opacity: 1;
+    }
+
+    .insta-item:hover .insta-icon {
+        transform: translateY(0); /* Icon neechay se upar ayega */
+    }
+
+    /* --- Responsive Design for Mobile --- */
+    @media (max-width: 768px) {
+        .promo-banner {
+            padding: 60px 20px;
+            background-attachment: scroll; /* Mobile par parallax band kar diya for better performance */
+            text-align: center;
+        }
+        .promo-overlay {
+            background: rgba(17, 17, 17, 0.75); /* Mobile par full dark fade */
+        }
+        .promo-title {
+            font-size: 32px;
+        }
+        .promo-desc {
+            font-size: 14px;
+        }
+        
+        .insta-grid {
+            grid-template-columns: repeat(2, 1fr); /* Mobile par 2 images ek line mein */
+            gap: 10px;
+        }
+    }
+</style>
+
+<!-- ================= PART 4 START ================= -->
+
+
+<!-- Instagram Gallery Section -->
+<section class="insta-section">
+    <div class="insta-header">
+        <span class="insta-handle">@ZeeshanDryFruits</span>
+        <h2 class="section-title">Follow Us on <span>Instagram</span></h2>
+    </div>
+
+    <div class="insta-grid">
+        <!-- Image 1 -->
+        <div class="insta-item">
+            <img src="media/insta1.webp" alt="Insta 1" class="insta-img">
+            <div class="insta-overlay">
+                <svg class="insta-icon" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.86 3.91 2.31 7.15 2.16c1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.69.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.77-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm5.22-9.6a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg>
+            </div>
+        </div>
+        <!-- Image 2 -->
+        <div class="insta-item">
+            <img src="media/insta2.webp" alt="Insta 2" class="insta-img">
+            <div class="insta-overlay">
+                <svg class="insta-icon" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.86 3.91 2.31 7.15 2.16c1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.69.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.77-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm5.22-9.6a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg>
+            </div>
+        </div>
+        <!-- Image 3 -->
+        <div class="insta-item">
+            <img src="media/insta3.webp" alt="Insta 3" class="insta-img">
+            <div class="insta-overlay">
+                <svg class="insta-icon" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.86 3.91 2.31 7.15 2.16c1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.69.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.77-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm5.22-9.6a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg>
+            </div>
+        </div>
+        <!-- Image 4 -->
+        <div class="insta-item">
+            <img src="media/insta4.webp" alt="Insta 4" class="insta-img">
+            <div class="insta-overlay">
+                <svg class="insta-icon" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.86 3.91 2.31 7.15 2.16c1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.69.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.77-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm5.22-9.6a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg>
+            </div>
+        </div>
+        <!-- Image 5 -->
+        <div class="insta-item">
+            <img src="media/insta5.webp" alt="Insta 5" class="insta-img">
+            <div class="insta-overlay">
+                <svg class="insta-icon" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.86 3.91 2.31 7.15 2.16c1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.69.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.77-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm5.22-9.6a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg>
+            </div>
+        </div>
+        <!-- Image 6 -->
+        <div class="insta-item">
+            <img src="media/insta6.webp" alt="Insta 6" class="insta-img">
+            <div class="insta-overlay">
+                <svg class="insta-icon" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.86 3.91 2.31 7.15 2.16c1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.69.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.77-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm5.22-9.6a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================= PART 4 END ================= -->
+ <style>
+    /* --- 8. Trust Badges Section --- */
+    .trust-section {
+        padding: 60px 5%;
+        background-color: var(--bg-white);
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* PC par 4 columns */
+        gap: 20px;
+        text-align: center;
+    }
+
+    .trust-item {
+        padding: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .trust-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .trust-icon {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 15px;
+        fill: var(--primary-gold);
+    }
+
+    .trust-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-family: 'Poppins', sans-serif;
+        color: var(--text-dark);
+    }
+
+    .trust-desc {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    /* --- 9. About Us Section (Our Story) --- */
+    .about-section {
+        padding: 80px 5%;
+        background-color: #fafafa;
+    }
+
+    .about-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .about-image-col {
+        flex: 1;
+        position: relative;
+    }
+
+    .about-img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        display: block;
+    }
+    
+    /* Image ke peechay ek gold border accent */
+    .about-image-col::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        width: 100%;
+        height: 100%;
+        border: 3px solid var(--primary-gold);
+        border-radius: 8px;
+        z-index: -1;
+    }
+
+    .about-text-col {
+        flex: 1;
+    }
+
+    .about-subtitle {
+        color: var(--secondary-green);
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .about-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 36px;
+        color: var(--text-dark);
+        line-height: 1.2;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .about-title span {
+        color: var(--primary-gold);
+    }
+
+    .about-desc {
+        font-size: 15px;
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+
+    .btn-secondary {
+        display: inline-block;
+        background-color: transparent;
+        color: var(--text-dark);
+        padding: 12px 30px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: 2px solid var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--text-dark);
+        color: var(--bg-white);
+    }
+
+    /* --- Responsive Design for Mobile --- */
+    @media (max-width: 768px) {
+        .trust-grid {
+            grid-template-columns: repeat(2, 1fr); /* Mobile par 2 badges ek line mein */
+            gap: 15px;
+        }
+        .trust-icon { width: 35px; height: 35px; }
+        .trust-title { font-size: 14px; }
+        .trust-desc { font-size: 11px; }
+        
+        .about-section {
+            padding: 50px 20px;
+        }
+        .about-container {
+            flex-direction: column; /* Mobile par image upar, text neechay */
+            gap: 40px;
+        }
+        .about-image-col::after {
+            bottom: -10px;
+            right: -10px;
+        }
+        .about-title { font-size: 28px; }
+        .about-desc { font-size: 14px; }
+    }
+</style>
+
+<!-- ================= PART 4.5 START ================= -->
+
+<!-- Trust Badges Section -->
+<section class="trust-section">
+    <div class="trust-grid">
+        <div class="trust-item">
+            <!-- Fast Delivery SVG -->
+            <svg class="trust-icon" viewBox="0 0 24 24"><path d="M19 8h-3V5a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v12h1.5a2.5 2.5 0 1 0 5 0h7a2.5 2.5 0 1 0 5 0h1.5V11.5L19 8zm-2.3-2l1.9 2.5H16V6h.7zM6 18.5A1.5 1.5 0 1 1 7.5 17 1.5 1.5 0 0 1 6 18.5zm11 0A1.5 1.5 0 1 1 18.5 17 1.5 1.5 0 0 1 17 18.5zM20 16h-.8a3.5 3.5 0 1 0-4.4 0H9.2a3.5 3.5 0 1 0-4.4 0H4V6h10v10h2v-4h4.5v4z"/></svg>
+            <h4 class="trust-title">Fast Delivery</h4>
+            <p class="trust-desc">Nationwide shipping right to your doorstep.</p>
+        </div>
+        <div class="trust-item">
+            <!-- 100% Pure SVG -->
+            <svg class="trust-icon" viewBox="0 0 24 24"><path d="M21 11c0-5.5-4.5-10-10-10S1 5.5 1 11c0 2.4.9 4.6 2.3 6.4L2 22l4.6-1.3c1.8 1.4 4 2.3 6.4 2.3 5.5 0 10-4.5 10-10zm-10 8c-2 0-3.9-.7-5.4-1.9l-3.3.9.9-3.3C2.7 13.1 2 11.1 2 9c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/><path d="M11 5h2v7h-2zM11 13h2v2h-2z"/></svg>
+            <h4 class="trust-title">100% Pure</h4>
+            <p class="trust-desc">Authentic and organic products from Skardu.</p>
+        </div>
+        <div class="trust-item">
+            <!-- Premium Quality SVG -->
+            <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 2L9.3 4.7 5.5 4.3 4.8 8.1 2 10.5 3.4 14l-1.4 3.5 2.8 2.4.7 3.8 3.8-.4L12 22l2.7-2.7 3.8.4.7-3.8 2.8-2.4L20.6 14 22 10.5 19.2 8.1 18.5 4.3 14.7 4.7 12 2zm0 18.2l-2.1-2.1-3 .3-.5-3-2.2-1.9 1.1-2.8-1.1-2.8 2.2-1.9.5-3 3 .3 2.1-2.1 2.1 2.1 3-.3.5 3 2.2 1.9-1.1 2.8 1.1 2.8-2.2 1.9-.5 3-3-.3-2.1 2.1z"/><path d="M10.6 15.6l-3.3-3.3 1.4-1.4 1.9 1.9 4.9-4.9 1.4 1.4z"/></svg>
+            <h4 class="trust-title">Premium Quality</h4>
+            <p class="trust-desc">Hand-picked selection for the best experience.</p>
+        </div>
+        <div class="trust-item">
+            <!-- Customer Support SVG -->
+            <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/><path d="M11 7h2v6h-2zM11 15h2v2h-2z"/></svg>
+            <h4 class="trust-title">Customer Support</h4>
+            <p class="trust-desc">We are always here to help via WhatsApp.</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Us (Our Story) Section -->
+<section class="about-section">
+    <div class="about-container">
+        <!-- Image Column -->
+        <div class="about-image-col">
+            <!-- Yahan Skardu mountains ya salajeet extraction ki achi si image aayegi -->
+            <img src="media/about.webp" alt="Skardu Mountains" class="about-img">
+        </div>
+        
+        <!-- Text Column -->
+        <div class="about-text-col">
+            <span class="about-subtitle">Our Story</span>
+            <h2 class="about-title">The Pure Essence of <span>Skardu</span></h2>
+            <p class="about-desc">
+                Zeeshan Dry Fruits & Salajeet Center was founded with a single mission: to bring the purest, most authentic treasures of the Himalayan mountains directly to your doorstep. We source our premium Salajeet and fresh dry fruits directly from the high-altitude valleys of Skardu.
+            </p>
+            <p class="about-desc">
+                With a commitment to 100% natural, unadulterated quality, our products retain their original health benefits, crispness, and rich flavors. Experience the true taste of nature with every bite.
+            </p>
+            <a href="#about" class="btn-secondary">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PART 4.5 END ================= -->
+ <style>
+    /* --- 10. Contact Us Section --- */
+    .contact-section {
+        padding: 80px 5%;
+        background-color: var(--bg-white);
+    }
+
+    .contact-container {
+        display: flex;
+        max-width: 1100px;
+        margin: 0 auto;
+        gap: 60px;
+        background: #fafafa;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        border: 1px solid #f0f0f0;
+    }
+
+    .contact-info {
+        flex: 1;
+        background-color: var(--announcement-bg);
+        color: var(--bg-white);
+        padding: 50px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .contact-info-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        color: var(--primary-gold);
+        margin-bottom: 20px;
+    }
+
+    .contact-info-text {
+        font-size: 14px;
+        color: #d0d0d0;
+        margin-bottom: 40px;
+        line-height: 1.6;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+        gap: 15px;
+    }
+
+    .info-icon {
+        width: 24px;
+        height: 24px;
+        fill: var(--primary-gold);
+        flex-shrink: 0;
+    }
+
+    .info-details h4 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #ffffff;
+    }
+
+    .info-details p {
+        font-size: 14px;
+        color: #b0b0b0;
+    }
+
+    .contact-form-wrapper {
+        flex: 1.5;
+        padding: 50px 40px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+    }
+
+    .form-input, .form-textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        background-color: var(--bg-white);
+        transition: border-color 0.3s ease;
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+        outline: none;
+        border-color: var(--primary-gold);
+    }
+
+    .btn-submit {
+        background-color: var(--primary-gold);
+        color: var(--text-dark);
+        border: none;
+        padding: 14px 30px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        background-color: var(--text-dark);
+        color: var(--primary-gold);
+    }
+
+    /* --- 11. Premium Footer --- */
+    .premium-footer {
+        background-color: var(--announcement-bg);
+        color: #ffffff;
+        padding: 70px 5% 20px;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1.5fr;
+        gap: 50px;
+        margin-bottom: 50px;
+    }
+
+    .footer-col h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        color: var(--primary-gold);
+        margin-bottom: 20px;
+    }
+
+    .footer-desc {
+        font-size: 14px;
+        color: #b0b0b0;
+        line-height: 1.8;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+
+    .footer-links {
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+
+    .footer-links a {
+        color: #b0b0b0;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary-gold);
+        padding-left: 5px; /* Hover par halka sa move hoga */
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        font-size: 13px;
+        color: #888;
+    }
+
+    .footer-bottom span {
+        color: var(--primary-gold);
+    }
+
+    /* --- Responsive Design for Mobile --- */
+    @media (max-width: 991px) {
+        .contact-container {
+            flex-direction: column;
+            gap: 0;
+        }
+        .footer-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contact-section { padding: 50px 20px; }
+        .contact-info, .contact-form-wrapper { padding: 30px 20px; }
+        
+        .footer-grid {
+            grid-template-columns: 1fr; /* Mobile par single column */
+            gap: 30px;
+        }
+    }
+</style>
+
+<!-- ================= PART 5 START ================= -->
+
+<!-- Contact Us Section -->
+<section class="contact-section">
+    <div class="contact-container">
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3 class="contact-info-title">Get In Touch</h3>
+            <p class="contact-info-text">Have questions about our premium Salajeet or Dry Fruits? Feel free to reach out to us directly from Skardu.</p>
+            
+            <!-- Address -->
+            <div class="info-item">
+                <svg class="info-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <div class="info-details">
+                    <h4>Visit Us</h4>
+                    <p>Purana Bazaar, Skardu, Gilgit-Baltistan</p>
+                </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="info-item">
+                <svg class="info-icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <div class="info-details">
+                    <h4>Call or WhatsApp</h4>
+                    <p>0346-6593878<br>0355-5200889</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+            <h2 class="section-title" style="text-align: left; font-size: 28px; margin-bottom: 25px;">Send a <span>Message</span></h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone / WhatsApp Number</label>
+                    <input type="tel" class="form-input" placeholder="Enter your number" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Your Message</label>
+                    <textarea class="form-textarea" placeholder="How can we help you?" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Premium Footer -->
+<footer class="premium-footer">
+    <div class="footer-grid">
+        <!-- Brand Info -->
+        <div class="footer-col">
+            <h3 style="font-size: 28px; margin-bottom: 10px;">Zee<span style="color: #fff;">shan</span></h3>
+            <span style="color: var(--secondary-green); font-style: italic; font-size: 13px; font-family: 'Playfair Display', serif; display: block; margin-bottom: 20px;">Dry Fruits & Salajeet Center</span>
+            <p class="footer-desc">Delivering the purest Himalayan treasures directly from the majestic valleys of Skardu to your doorstep. 100% natural, always.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop Dry Fruits</a></li>
+                <li><a href="#">Premium Salajeet</a></li>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Footer -->
+        <div class="footer-col">
+            <h3>Contact Info</h3>
+            <ul class="footer-links">
+                <li style="color: #b0b0b0; margin-bottom: 10px;">📍 Purana Bazaar, Skardu</li>
+                <li style="color: #b0b0b0; margin-bottom: 10px;">📞 0346-6593878</li>
+                <li style="color: #b0b0b0; margin-bottom: 10px;">📞 0355-5200889</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+        <p>&copy; 2026 <span>Zeeshan Dry Fruits & Salajeet Center</span>. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- ================= PART 5 END ================= -->
+</body>
+</html>
